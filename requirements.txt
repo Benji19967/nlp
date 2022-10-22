@@ -1,0 +1,4 @@
+pydantic
+mypy
+torch
+transformers
