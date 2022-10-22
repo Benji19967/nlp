@@ -7,4 +7,4 @@ install:
 	env/bin/pip install $(shell cat requirements.txt | tr '\n' ' ')
 
 mypy:
-	env/bin/mypy
+	env/bin/mypy ner/
