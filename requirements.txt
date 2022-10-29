@@ -2,3 +2,5 @@ pydantic
 mypy
 torch
 transformers
+fastapi
+typer[all]
