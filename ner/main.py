@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
 from fastapi import FastAPI
+from typing import List
 
 MODEL = "dslim/bert-base-NER"
 PIPELINE = "ner"
@@ -8,7 +9,12 @@ PIPELINE = "ner"
 EXAMPLE = "My name is Wolfgang and I live in Berlin."
 "I like Apple and my favourite fruit is the Apple."
 
-fast_api = FastAPI()
+app = FastAPI()
+
+
+@app.get("/")
+def read_root() -> List[Entity]:
+    return main()
 
 
 class Entity(BaseModel):
@@ -20,15 +26,15 @@ class Entity(BaseModel):
     score: float
 
 
-def get_model():
+def main() -> List[Entity]:
     tokenizer = AutoTokenizer.from_pretrained(MODEL)
     model = AutoModelForTokenClassification.from_pretrained(MODEL)
-    return model
-
-
-if __name__ == "__main__":
-    model = get_model()
     nlp = pipeline(PIPELINE, model=model, tokenizer=tokenizer)
 
     ner_results = [Entity(**e) for e in nlp(EXAMPLE)]
     print(ner_results)
+    return ner_results
+
+
+if __name__ == "__main__":
+    main()

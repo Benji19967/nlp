@@ -7,4 +7,7 @@ install:
 	env/bin/pip install $(shell cat requirements.txt | tr '\n' ' ')
 
 mypy:
-	env/bin/mypy ner/
+	env/bin/mypy . 
+
+start:
+	uvicorn main:app --reload
