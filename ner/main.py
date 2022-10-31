@@ -12,11 +12,6 @@ EXAMPLE = "My name is Wolfgang and I live in Berlin."
 app = FastAPI()
 
 
-@app.get("/")
-def read_root() -> List[Entity]:
-    return main()
-
-
 class Entity(BaseModel):
     word: str
     entity: str
@@ -24,6 +19,11 @@ class Entity(BaseModel):
     end: int
     index: int
     score: float
+
+
+@app.get("/")
+def read_root() -> List[Entity]:
+    return main()
 
 
 def main() -> List[Entity]:
