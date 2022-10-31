@@ -16,4 +16,4 @@ mypy:
 	env/bin/mypy . 
 
 start:
-	uvicorn main:app --reload
+	uvicorn ner.main:app --reload
