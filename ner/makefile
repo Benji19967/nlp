@@ -13,7 +13,7 @@ container:
 	docker run --rm -it --entrypoint bash ner
 
 mypy:
-	env/bin/mypy . 
+	env/bin/mypy 
 
 start:
 	uvicorn ner.main:app --reload
